@@ -1,0 +1,37 @@
+package ui
+
+import "time"
+import "github.com/febrianpaper/pg-tools/constant"
+
+type TrxLog struct {
+    ID         string    `json:"id" db:"id"`
+    Type       string    `json:"trxType" db:"trx_type"`
+    Subtype    string    `json:"subtype" db:"sub_type"`
+    Number     string    `json:"trxNo" db:"trx_no"`
+    CreatedAt  time.Time `json:"createdAt" db:"created_at"`
+}
+
+templ LogItem(log TrxLog) {
+  <li class="flex items-center justify-between gap-x-6 py-5 bg-white shadow-sm sm:rounded-lg p-4">
+    <div class="min-w-0">
+      <div class="flex items-start gap-x-3">
+        <p class="text-lg font-semibold leading-6 text-teal-700">{log.Number}</p>
+        if log.Subtype == "payment" {
+          <p class="cbadge text-green-700 bg-green-50 ring-green-600/20">Payment</p>
+        } else {
+          <p class="cbadge text-gray-700 bg-gray-50 ring-gray-600/20">Inquiry</p>
+        }
+      </div>
+      <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+        <p class="whitespace-nowrap">{log.CreatedAt.Format(constant.SnapDateFormatLayout)}</p>
+      </div>
+    </div>
+    <button 
+      hx-get={"/virtual-account/log/detail?id=" + log.ID}
+      hx-swap="innerHTML transition:true"
+      hx-target="#page-content"
+      class="button-teal">
+      Detail
+    </button>
+  </li>
+}

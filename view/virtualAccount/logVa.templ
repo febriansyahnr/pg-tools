@@ -1,0 +1,57 @@
+package view_virtualAccount
+
+import "github.com/febrianpaper/pg-tools/view/ui"
+import "github.com/febrianpaper/pg-tools/internal/model/trxHistory"
+import "encoding/json"
+
+templ LogVAPage(logs []ui.TrxLog) {
+  @Sublayout("log-va") {
+    <div class="bg-white shadow-sm sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">Log VA</h3>
+        <div class="mt-2 max-w-xl text-sm text-gray-500">
+          <p>Log Request</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="data-list" class="mt-4">
+      @TrxLogsVA(logs)
+    </div>
+  }
+}
+
+templ TrxLogsVA(logs []ui.TrxLog) {
+  <ul role="list" class="space-y-1">
+    for _, log := range logs {
+      @ui.LogItem(log)
+    }
+  </ul>
+}
+
+func PrettyString(str string) string {
+    var prettyJSON bytes.Buffer
+    if err := json.Indent(&prettyJSON, []byte(str), "", "    "); err != nil {
+        return ""
+    }
+    return prettyJSON.String()
+}
+
+templ LogDetailPage(log model_trxHistory.TrxLog) {
+  @Sublayout("log-va") {
+    <section class="container mx-auto px-4 py-5">
+      <article class="prose prose-img:rounded-xl prose-a:text-blue-600">
+        <h1>Detail Log VA</h1>
+        <span class="block font-semibold text-xl"> Number: <span class="text-teal-500">{log.Number}</span> </span>
+        <span class="block font-semibold text-xl"> Type: <span class="font-normal text-teal-500 capitalize">{log.Type} | {log.Subtype}</span> </span>
+        <h2>Request</h2>
+        <h3>Request Header</h3>
+        <pre>{PrettyString(log.Additional)}</pre>
+        <h3>Request Body</h3>
+        <pre>{PrettyString(log.Request)}</pre>
+        <h2>Response</h2>
+        <pre>{PrettyString(log.Response)}</pre>
+      </article>
+    </section>
+  }
+}

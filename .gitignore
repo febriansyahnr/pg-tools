@@ -1,0 +1,8 @@
+.env
+bin
+*_templ.go*
+node_modules
+vendor
+temp
+.config.yaml
+.secret.yaml

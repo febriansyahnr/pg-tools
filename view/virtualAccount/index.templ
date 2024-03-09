@@ -1,0 +1,95 @@
+package view_virtualAccount
+
+import "github.com/febrianpaper/pg-tools/view/layout"
+import "github.com/febrianpaper/pg-tools/view/ui"
+
+func getActiveLink(currentPage, pageID string) string {
+  if currentPage == pageID {
+    return "active sublayout-item"
+  }
+
+  return "pasif sublayout-item"
+}
+
+templ Sublayout(pageID string) {
+  @layout.AdminLayout(){
+    <header class="bg-white shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+          <div class="">
+            <div class="sm:flex sm:items-baseline">
+              <h3 class="text-base font-semibold leading-6 text-gray-900">Virtual Account</h3>
+              <div class="mt-4 sm:ml-10 sm:mt-0">
+                <nav class="-mb-px flex space-x-8">
+                  <button 
+                    hx-get="/virtual-account" 
+                    hx-target="#page-content"
+                    hx-swap="innerHTML transition:true"
+                    class={getActiveLink("payment", pageID)}>Payment</button>
+                  // <a href="#" class={getActiveLink("create-va", pageID)}>Create VA</a>
+                  // <a href="#" class={getActiveLink("update-va", pageID)}>Update VA</a>
+                  <button 
+                    hx-get="/virtual-account/log-page" 
+                    hx-target="#page-content"
+                    hx-swap="innerHTML transition:true"
+                    class={getActiveLink("log-va", pageID)}>
+                      Log
+                    </button>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+    </header>
+    <main>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            {children...}
+        </div>
+    </main>
+  }
+}
+
+templ Index(listVA []ui.VAItemData) {
+  @Sublayout("payment") {
+    <div id="error-wrapper"></div>
+
+    <div class="bg-white shadow-sm sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">Payment</h3>
+        <div class="mt-2 max-w-xl text-sm text-gray-500">
+          <p>Input your virtual account number</p>
+        </div>
+        <form 
+          hx-post="/virtual-account/inquiry" 
+          hx-target="#data-list>ul"
+          hx-swap="beforeend transition:true"
+          class="mt-5 flex items-center" 
+          _="on submit set value of #va_number to ''">
+          <div class="w-full sm:max-w-xs">
+            <label for="email" class="sr-only">Virtual Account</label>
+            <input 
+              required
+              type="text"
+              name="va_number" 
+              id="va_number" 
+              placeholder="virtual account number"
+              class="block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+            />
+          </div>
+          <button type="submit" class="button-indigo">Inquiry</button>
+          <button 
+            hx-get="/virtual-account/list-processed-va" 
+            hx-target="#data-list" 
+            hx-swap="innerHTML transition:true"
+            type="button" 
+            class="button-red">
+            Clear
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="data-list" class="mt-4">
+      @ListVA(listVA)
+    </div>
+  }
+}

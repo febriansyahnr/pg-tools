@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+
+.title {
+    @apply text-2xl font-semibold text-zinc-900;
+}
+
+.sublayout-item {
+    @apply whitespace-nowrap border-b-2 px-1 pb-3 text-sm font-medium;
+}
+.sublayout-item.active {
+    @apply border-indigo-500 text-indigo-600;
+}
+.sublayout-item.pasif {
+    @apply border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700;
+}
+
+.button-indigo {
+    @apply mt-3 inline-flex w-full items-center justify-center rounded-md;
+    @apply bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto;
+}
+.button-teal {
+    @apply mt-3 inline-flex w-full items-center justify-center rounded-md;
+    @apply bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto;
+}
+.button-red {
+    @apply mt-3 inline-flex w-full items-center justify-center rounded-md;
+    @apply bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto;
+}
+.cbadge {
+    @apply rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset;
+}
+
+@tailwind utilities;
+

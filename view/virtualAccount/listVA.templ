@@ -1,0 +1,11 @@
+package view_virtualAccount
+
+import "github.com/febrianpaper/pg-tools/view/ui"
+
+templ ListVA(items []ui.VAItemData) {
+  <ul role="list" class="space-y-1">
+    for _, item := range items {
+      @ui.VAItem(item)
+    }
+  </ul>
+}
