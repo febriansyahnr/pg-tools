@@ -7,5 +7,5 @@ Aplikasi untuk membantu testing service di PG.
   - Postcss
   - Autoprefixer
 2. Golang
-  - (Templ)[https://github.com/a-h/templ]
-  - (Air)[https://github.com/cosmtrek/air]
+  - [Templ](https://github.com/a-h/templ)
+  - [Air](https://github.com/cosmtrek/air)
