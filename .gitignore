@@ -3,6 +3,6 @@ bin
 *_templ.go*
 node_modules
 vendor
-temp
+tmp/*
 .config.yaml
 .secret.yaml

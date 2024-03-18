@@ -48,9 +48,11 @@ func (s *SnapCoreAdapter) InquiryVA(ctx context.Context, token string, req *mode
 
 	respBytes, status, err := s.httpClient.POST(ctx, url, req, headers)
 	if err != nil {
+		slog.Info("Inquiry", "response", string(respBytes))
 		return nil, fmt.Errorf("error when calling snapcore inquiry va: %w", err)
 	}
 	if status != http.StatusOK {
+		slog.Info("Inquiry", "response", string(respBytes))
 		return nil, fmt.Errorf("error when calling snapcore inquiry va status not ok")
 	}
 	var resp model_snapCore.SnapVAResponse
