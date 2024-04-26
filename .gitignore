@@ -6,3 +6,5 @@ vendor
 tmp/*
 .config.yaml
 .secret.yaml
+tmp/main
+tmp/*.log
