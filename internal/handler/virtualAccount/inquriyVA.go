@@ -35,9 +35,9 @@ func (h *VirtualAccountHandler) Inquiry(w http.ResponseWriter, r *http.Request) 
 	if err != nil {
 		return ErrorResponse(w, r, vaNumber, err)
 	}
-	vaType := "close"
-	if vaNumber[:4] == "7664" {
-		vaType = "open"
+	vaType := "open"
+	if vaNumber[:4] == "7663" {
+		vaType = "closed"
 	}
 
 	vaViewData := ui.VAItemData{

@@ -29,9 +29,9 @@ func (h *VirtualAccountHandler) Index(w http.ResponseWriter, r *http.Request) er
 	queueVA, err := h.vaService.GetAllQueue(r.Context())
 	if err == nil {
 		for _, va := range queueVA {
-			vaType := "close"
-			if va.Number[:4] == "7664" {
-				vaType = "open"
+			vaType := "open"
+			if va.Number[:4] == "7663" {
+				vaType = "close"
 			}
 			listVA = append(listVA, ui.VAItemData{
 				ID:     va.ID,
