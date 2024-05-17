@@ -13,7 +13,9 @@ import (
 	model_trxHistory "github.com/febrianpaper/pg-tools/internal/model/trxHistory"
 )
 
-const PaymentVAUrl = "/api/v1.0/transfer-va/payment"
+const PaymentVAUrl = "/snap-core/api/v1.0/transfer-va/payment"
+
+// const PaymentVAUrl = "/api/v1.0/transfer-va/payment"
 
 // paymentVA implements port.SnapCorePort.
 func (s *SnapCoreAdapter) PaymentVA(ctx context.Context, token string, req *model_snapCore.VAPaymentRequest) error {
@@ -42,9 +44,10 @@ func (s *SnapCoreAdapter) PaymentVA(ctx context.Context, token string, req *mode
 		"CHANNEL-ID":    "751",
 	}
 	fmt.Println("====================")
-	slog.Info("[payment VA]", "url", url, "headers", headers, "body", req)
+	slog.Info("[Payment VA]", "url", url, "headers", toString(headers), "body", toString(req))
 
 	respBytes, status, err := s.httpClient.POST(ctx, url, req, headers)
+	slog.Info("[Payment VA]", "Resp", string(respBytes))
 	if err != nil {
 		return fmt.Errorf("error when calling snapcore payment va: %w", err)
 	}

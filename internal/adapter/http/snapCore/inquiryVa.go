@@ -14,8 +14,14 @@ import (
 )
 
 const (
-	InquiryVAUrl = "/api/v1.0/transfer-va/inquiry"
+	InquiryVAUrl = "/snap-core/api/v1.0/transfer-va/inquiry"
+	// InquiryVAUrl = "/api/v1.0/transfer-va/inquiry"
 )
+
+func toString(data any) string {
+	str, _ := json.Marshal(data)
+	return string(str)
+}
 
 // InquiryVA implements port.SnapCorePort.
 func (s *SnapCoreAdapter) InquiryVA(ctx context.Context, token string, req *model_snapCore.InquiryRequestData) (*model_snapCore.InquiryData, error) {
@@ -44,13 +50,14 @@ func (s *SnapCoreAdapter) InquiryVA(ctx context.Context, token string, req *mode
 		"CHANNEL-ID":    "751",
 	}
 	fmt.Println("====================")
-	slog.Info("[Inquiry VA]", "url", url, "headers", headers, "body", req)
+	slog.Info("[Inquiry VA]", "url", url, "headers", toString(headers), "body", toString(req))
 
 	respBytes, status, err := s.httpClient.POST(ctx, url, req, headers)
 	if err != nil {
 		slog.Info("Inquiry", "response", string(respBytes))
 		return nil, fmt.Errorf("error when calling snapcore inquiry va: %w", err)
 	}
+	slog.Info("[Inquiry VA]", "Resp", string(respBytes))
 	if status != http.StatusOK {
 		slog.Info("Inquiry", "response", string(respBytes))
 		return nil, fmt.Errorf("error when calling snapcore inquiry va status not ok")

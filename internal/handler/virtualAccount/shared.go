@@ -7,6 +7,7 @@ import (
 	"github.com/febrianpaper/pg-tools/view/ui"
 )
 
+// ErrorResponse is a helper function to render error message to the user.
 func ErrorResponse(w http.ResponseWriter, r *http.Request, id string, err error) error {
 	w.Header().Set("HX-Reswap", "innerHTML transition:true")
 	w.Header().Set("HX-Retarget", "#error-wrapper")

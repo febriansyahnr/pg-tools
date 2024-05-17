@@ -22,6 +22,7 @@ type (
 	}
 	Queries interface {
 		GetToken(ctx context.Context) (string, error)
+		// InquiryVA get va data from snapCore
 		InquiryVA(ctx context.Context, query queries_virtualAccount.InquiryVAQuery) (*model_snapCore.InquiryData, string, error)
 		GetAllQueue(ctx context.Context) ([]model_trxHistory.TrxQueue, error)
 	}

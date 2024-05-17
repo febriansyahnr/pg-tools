@@ -13,7 +13,8 @@ import (
 )
 
 const (
-	B2BUrl = "/api/v1.0/access-token/b2b"
+	B2BUrl = "/snap-core/api/v1.0/access-token/b2b"
+	// B2BUrl = "/api/v1.0/access-token/b2b"
 )
 
 // GetToken implements port.SnapCorePort.

@@ -3,10 +3,13 @@ package httputil
 import (
 	"bytes"
 	"context"
+	"log/slog"
 
 	"encoding/json"
 	"io"
 	"net/http"
+
+	"moul.io/http2curl"
 )
 
 func RequestHitAPI(
@@ -34,6 +37,8 @@ func RequestHitAPI(
 
 	request.Header.Set("Content-type", "application/json")
 
+	cmd, _ := http2curl.GetCurlCommand(request)
+
 	response, err := httpClient.Do(request)
 	if err != nil {
 		return res, code, err
@@ -47,6 +52,8 @@ func RequestHitAPI(
 	if err != nil {
 		return res, code, err
 	}
+
+	slog.Info("DLV request created:", slog.Any("client url", cmd), slog.String("response", string(res)))
 
 	if isHttpError := code != http.StatusOK && code != http.StatusCreated; isHttpError {
 		var errRes map[string]interface{}

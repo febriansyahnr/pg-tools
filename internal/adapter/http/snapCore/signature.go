@@ -9,8 +9,10 @@ import (
 )
 
 const (
-	AuthSignatureUrl    = "/api/v1.0/utilities/signature-auth"
-	ServiceSignatureUrl = "/api/v1.0/utilities/signature-service"
+	AuthSignatureUrl = "/snap-core/api/v1.0/utilities/signature-auth"
+	// AuthSignatureUrl = "/api/v1.0/utilities/signature-auth"
+	ServiceSignatureUrl = "/snap-core/api/v1.0/utilities/signature-service"
+	// ServiceSignatureUrl = "/api/v1.0/utilities/signature-service"
 )
 
 func (s *SnapCoreAdapter) GetAuthSignature(ctx context.Context, body json.RawMessage, timeStamp string) (string, error) {

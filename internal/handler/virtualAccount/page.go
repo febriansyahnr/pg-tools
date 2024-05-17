@@ -35,12 +35,5 @@ func (h *VirtualAccountHandler) LogDetailPage(w http.ResponseWriter, r *http.Req
 		return ErrorResponse(w, r, "log-va", err)
 	}
 
-	// log := ui.TrxLog{
-	// 	ID:        logVARequest.ID,
-	// 	Type:      logVARequest.Type,
-	// 	Subtype:   logVARequest.Subtype,
-	// 	Number:    logVARequest.Number,
-	// 	CreatedAt: logVARequest.CreatedAt,
-	// }
 	return handler.Render(r, w, view_virtualAccount.LogDetailPage(*logVARequest))
 }
