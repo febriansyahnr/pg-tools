@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	InquiryVAUrl = "/snap-core/api/v1.0/transfer-va/inquiry"
-	// InquiryVAUrl = "/api/v1.0/transfer-va/inquiry"
+	// InquiryVAUrl = "/snap-core/api/v1.0/transfer-va/inquiry"
+	InquiryVAUrl = "/api/v1.0/transfer-va/inquiry"
 )
 
 func toString(data any) string {
@@ -25,7 +25,7 @@ func toString(data any) string {
 
 // InquiryVA implements port.SnapCorePort.
 func (s *SnapCoreAdapter) InquiryVA(ctx context.Context, token string, req *model_snapCore.InquiryRequestData) (*model_snapCore.InquiryData, error) {
-	url := s.config.SnapCoreURL + InquiryVAUrl
+	url := s.config.SnapCoreURL + s.config.SnapCoreBase + InquiryVAUrl
 
 	now := time.Now()
 	timeStamp := now.Format(constant.SnapDateFormatLayout)

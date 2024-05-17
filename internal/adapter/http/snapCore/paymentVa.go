@@ -13,13 +13,13 @@ import (
 	model_trxHistory "github.com/febrianpaper/pg-tools/internal/model/trxHistory"
 )
 
-const PaymentVAUrl = "/snap-core/api/v1.0/transfer-va/payment"
+// const PaymentVAUrl = "/snap-core/api/v1.0/transfer-va/payment"
 
-// const PaymentVAUrl = "/api/v1.0/transfer-va/payment"
+const PaymentVAUrl = "/api/v1.0/transfer-va/payment"
 
 // paymentVA implements port.SnapCorePort.
 func (s *SnapCoreAdapter) PaymentVA(ctx context.Context, token string, req *model_snapCore.VAPaymentRequest) error {
-	url := s.config.SnapCoreURL + PaymentVAUrl
+	url := s.config.SnapCoreURL + s.config.SnapCoreBase + PaymentVAUrl
 
 	now := time.Now()
 	timeStamp := now.Format(constant.SnapDateFormatLayout)

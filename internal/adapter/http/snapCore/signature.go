@@ -9,14 +9,14 @@ import (
 )
 
 const (
-	AuthSignatureUrl = "/snap-core/api/v1.0/utilities/signature-auth"
-	// AuthSignatureUrl = "/api/v1.0/utilities/signature-auth"
-	ServiceSignatureUrl = "/snap-core/api/v1.0/utilities/signature-service"
-	// ServiceSignatureUrl = "/api/v1.0/utilities/signature-service"
+	// AuthSignatureUrl = "/snap-core/api/v1.0/utilities/signature-auth"
+	AuthSignatureUrl = "/api/v1.0/utilities/signature-auth"
+	// ServiceSignatureUrl = "/snap-core/api/v1.0/utilities/signature-service"
+	ServiceSignatureUrl = "/api/v1.0/utilities/signature-service"
 )
 
 func (s *SnapCoreAdapter) GetAuthSignature(ctx context.Context, body json.RawMessage, timeStamp string) (string, error) {
-	url := s.config.SnapCoreURL + AuthSignatureUrl
+	url := s.config.SnapCoreURL + s.config.SnapCoreBase + AuthSignatureUrl
 
 	headers := map[string]string{
 		"X-TIMESTAMP":  timeStamp,
@@ -51,7 +51,7 @@ type serviceSignatureParams struct {
 }
 
 func (s *SnapCoreAdapter) GetServiceSignature(ctx context.Context, param serviceSignatureParams, body any) (string, error) {
-	url := s.config.SnapCoreURL + ServiceSignatureUrl
+	url := s.config.SnapCoreURL + s.config.SnapCoreBase + ServiceSignatureUrl
 
 	headers := map[string]string{
 		"X-TIMESTAMP":     param.TimeStamp,

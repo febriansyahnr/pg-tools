@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	B2BUrl = "/snap-core/api/v1.0/access-token/b2b"
-	// B2BUrl = "/api/v1.0/access-token/b2b"
+	// B2BUrl = "/snap-core/api/v1.0/access-token/b2b"
+	B2BUrl = "/api/v1.0/access-token/b2b"
 )
 
 // GetToken implements port.SnapCorePort.
@@ -28,7 +28,7 @@ func (s *SnapCoreAdapter) GetToken(ctx context.Context) (string, error) {
 		return "", err
 	}
 
-	url := s.config.SnapCoreURL + B2BUrl
+	url := s.config.SnapCoreURL + s.config.SnapCoreBase + B2BUrl
 	header := map[string]string{
 		"X-TIMESTAMP":  timeStamp,
 		"X-CLIENT-KEY": s.secret.SnapCoreKey,

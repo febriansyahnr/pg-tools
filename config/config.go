@@ -16,6 +16,7 @@ type Config struct {
 	RabbitMQConfig RabbitMQConfig     `mapstructure:"RABBITMQ"`
 	BankAcquirer   []ThirdPartyConfig `mapstructure:"BANK_ACQUIRER"`
 	SnapCoreURL    string             `mapstructure:"SNAP_CORE_URL"`
+	SnapCoreBase   string             `mapstructure:"SNAP_CORE_BASE"`
 }
 
 type ThirdPartyConfig struct {
