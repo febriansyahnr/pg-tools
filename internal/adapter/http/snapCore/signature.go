@@ -58,7 +58,7 @@ func (s *SnapCoreAdapter) GetServiceSignature(ctx context.Context, param service
 		"X-CLIENT-SECRET": s.secret.SnapCoreSecret,
 		"AccessToken":     "Bearer " + param.AccessToken,
 		"HttpMethod":      param.HttpMethod,
-		"EndpoinUrl":      param.EndpoinUrl,
+		"EndpoinUrl":      s.config.SnapCoreBase + param.EndpoinUrl,
 	}
 	fmt.Println("====================")
 	slog.Info("[Get Service Signature]", "url", url, "headers", headers, "body", body)
