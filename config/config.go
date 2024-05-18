@@ -11,17 +11,11 @@ type Config struct {
 	ServiceName    string `mapstructure:"SERVICE_NAME"`
 	ServiceVersion string `mapstructure:"SERVICE_VERSION"`
 
-	MySQLConfig    MySQLConfig        `mapstructure:"DATABASE"`
-	RedisConfig    RedisConfig        `mapstructure:"REDIS"`
-	RabbitMQConfig RabbitMQConfig     `mapstructure:"RABBITMQ"`
-	BankAcquirer   []ThirdPartyConfig `mapstructure:"BANK_ACQUIRER"`
-	SnapCoreURL    string             `mapstructure:"SNAP_CORE_URL"`
-	SnapCoreBase   string             `mapstructure:"SNAP_CORE_BASE"`
-}
-
-type ThirdPartyConfig struct {
-	Name    string `mapstructure:"NAME"`
-	BaseUrl string `mapstructure:"BASE_URL"`
+	MySQLConfig    MySQLConfig    `mapstructure:"DATABASE"`
+	RedisConfig    RedisConfig    `mapstructure:"REDIS"`
+	RabbitMQConfig RabbitMQConfig `mapstructure:"RABBITMQ"`
+	SnapCoreURL    string         `mapstructure:"SNAP_CORE_URL"`
+	SnapCoreBase   string         `mapstructure:"SNAP_CORE_BASE"`
 }
 
 type Secret struct {
@@ -30,19 +24,10 @@ type Secret struct {
 	RabbitMQSecret RabbitMQSecret `mapstructure:"RABBITMQ"`
 	SecuritySecret SecuritySecret `mapstructure:"SECURITY"`
 
-	NewRelicLicenseKey string             `mapstructure:"NEW_RELIC_LICENSE_KEY"`
-	InternalServiceKey string             `mapstructure:"INTERNAL_SERVICE_KEY"`
-	BankAcquirer       []ThirdPartySecret `mapstructure:"BANK_ACQUIRER"`
-	SnapCoreKey        string             `mapstructure:"SNAP_CORE_KEY"`
-	SnapCoreSecret     string             `mapstructure:"SNAP_CORE_SECRET"`
-}
-
-type ThirdPartySecret struct {
-	Name       string `mapstructure:"NAME"`
-	ClientID   string `mapstructure:"CLIENT_ID"`
-	ClientKey  string `mapstructure:"CLIENT_KEY"`
-	PublicKey  string `mapstructure:"SECRET_KEY"`
-	PrivateKey string `mapstructure:"PRIVATE_KEY"`
+	NewRelicLicenseKey string `mapstructure:"NEW_RELIC_LICENSE_KEY"`
+	InternalServiceKey string `mapstructure:"INTERNAL_SERVICE_KEY"`
+	SnapCoreKey        string `mapstructure:"SNAP_CORE_KEY"`
+	SnapCoreSecret     string `mapstructure:"SNAP_CORE_SECRET"`
 }
 
 type MySQLConfig struct {
@@ -82,14 +67,7 @@ type RabbitMQSecret struct {
 }
 
 type SecuritySecret struct {
-	JwtSecretKey  string         `mapstructure:"JWT_SECRET_KEY"`
-	ChannelApiKey []ClientApiKey `mapstructure:"CHANNEL_API_KEY"`
-}
-
-type ClientApiKey struct {
-	ClientName   string `mapstructure:"CLIENT_NAME"`
-	ClientID     string `mapstructure:"CLIENT_ID"`
-	ClientSecret string `mapstructure:"CLIENT_SECRET"`
+	JwtSecretKey string `mapstructure:"JWT_SECRET_KEY"`
 }
 
 func LoadConfig(configPath, secretPath string) (*Config, *Secret, error) {
@@ -116,41 +94,4 @@ func LoadConfig(configPath, secretPath string) (*Config, *Secret, error) {
 	}
 
 	return &config, &secret, nil
-}
-
-func (c *SecuritySecret) GetClientApi(key string) *ClientApiKey {
-	for _, v := range c.ChannelApiKey {
-		if v.ClientID == key {
-			return &v
-		}
-	}
-	return nil
-}
-
-func (c *SecuritySecret) GetClientApiByName(clientName string) *ClientApiKey {
-	for _, v := range c.ChannelApiKey {
-		if v.ClientName == clientName {
-			return &v
-		}
-	}
-	return nil
-}
-
-func (c *Config) GetBankAcquirer(key string) *ThirdPartyConfig {
-	for _, v := range c.BankAcquirer {
-		if v.Name == key {
-			return &v
-		}
-	}
-
-	return nil
-}
-
-func (c *Secret) GetBankAcquirerSecret(key string) *ThirdPartySecret {
-	for _, v := range c.BankAcquirer {
-		if v.Name == key {
-			return &v
-		}
-	}
-	return nil
 }

@@ -1,0 +1,26 @@
+ENVIRONMENT: "development"
+SERVICE_NAME: "pg-tools"
+SERVICE_VERSION: "1.1.0"
+
+DATABASE:
+  DIALECT: "mysql"
+  HOST: "localhost"
+  PORT: "3306"
+  MAX_IDLE_CONNS: 10
+  MAX_OPEN_CONNS: 50
+  MAX_IDLE_TIME: 300
+  MAX_LIFE_TIME: 3600
+
+REDIS:
+  HOST: "localhost"
+  PORT: "6379"
+  CACHE_DB: 0
+
+RABBITMQ:
+  HOST: "localhost"
+  PORT: "5672"
+
+# SNAP_CORE_BASE: "/snap-core"
+SNAP_CORE_BASE: ""
+# SNAP_CORE_URL: "https://api-stg.harsya.com"
+SNAP_CORE_URL: "http://127.0.0.1:3000"
