@@ -9,6 +9,9 @@ templ Navigation() {
 			<ul class="menu menu-horizontal px-1">
 				<a href="/virtual-account" class="btn btn-primary">Virtual Account</a>
 			</ul>
+			<ul class="menu menu-horizontal px-1">
+				<a href="/Qris" class="btn btn-primary">Qris</a>
+			</ul>
 		</div>
 	</div>
 }
@@ -24,8 +27,9 @@ templ LayoutNav() {
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" -->
-              <a href="#/" class="text-white hover:bg-indigo-500 hover:bg-opacity-75" aria-current="page">Dashboard</a>
+              <a href="#/" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md" aria-current="page">Dashboard</a>
               <a href="/virtual-account" class="bg-indigo-700 text-white rounded-md px-3 py-2 text-sm font-medium">Virtual Account</a>
+              <a href="/qris" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium">Qris</a>
             </div>
           </div>
         </div>

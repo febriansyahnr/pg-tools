@@ -3,6 +3,7 @@ package view_virtualAccount
 import "github.com/febrianpaper/pg-tools/view/ui"
 import "github.com/febrianpaper/pg-tools/internal/model/trxHistory"
 import "encoding/json"
+import "bytes"
 
 templ LogVAPage(logs []ui.TrxLog) {
   @Sublayout("log-va") {

@@ -2,8 +2,6 @@ package commands_virtualAccount
 
 import (
 	"context"
-	"errors"
-	"log/slog"
 
 	model_snapCore "github.com/febrianpaper/pg-tools/internal/model/snapCore"
 	"github.com/febrianpaper/pg-tools/port"
@@ -35,10 +33,10 @@ func (h *PaymentVAHandler) PaymentVA(ctx context.Context, command PaymentVAComma
 		return err
 	}
 
-	if (queue.Number[:4] == "7663") && !queue.Amount.Equal(command.Amount) {
-		slog.Info("invalid amount", "expected", command.Amount, "actual", queue.Amount)
-		return errors.New("invalid amount")
-	}
+	// if (queue.Number[:4] == "7663") && !queue.Amount.Equal(command.Amount) {
+	// 	slog.Info("invalid amount", "expected", command.Amount, "actual", queue.Amount)
+	// 	return errors.New("invalid amount")
+	// }
 
 	inqData, err := model_snapCore.NewInquiryDataFromString(queue.Detail)
 	if err != nil {

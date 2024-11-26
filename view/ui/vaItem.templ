@@ -1,6 +1,5 @@
 package ui
 
-import "github.com/dustin/go-humanize"
 import "fmt"
 
 type VAItemData struct {
@@ -31,7 +30,6 @@ templ VAItem(item VAItemData){
       hx-target="#data-list"
       hx-swap="innerHTML transition:true"
       class="flex flex-none items-center gap-x-4">
-      if item.Type == "open" {
         <input 
           type="number" 
           name="amount" 
@@ -39,10 +37,6 @@ templ VAItem(item VAItemData){
           value={fmt.Sprintf("%.2f", item.Amount)}
           class="text-right block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
         />
-      } else {
-        <input type="hidden" name="amount" value={fmt.Sprintf("%.2f", item.Amount)}/>
-        <span class="font-semibold text-lg text-gray-900">RP {humanize.FormatFloat("#.###,##",item.Amount)}</span>
-      }
       <input type="hidden" name="id" value={item.ID}/>
       <button type="submit" class="button-teal">
         Pay

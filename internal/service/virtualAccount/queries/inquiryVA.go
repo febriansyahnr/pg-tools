@@ -31,10 +31,9 @@ func NewInquiryVAHandler(snapCore port.SnapCorePort, trxQueue port.TrxQueuePort)
 }
 
 func (h *InquiryVAHandler) InquiryVA(ctx context.Context, query InquiryVAQuery) (*model_snapCore.InquiryData, string, error) {
-
 	refNum := time.Now().Unix()
 	reqData := model_snapCore.InquiryRequestData{
-		PartnerServiceId: "7001",
+		PartnerServiceId: "22504",
 		CustomerNo:       "7001085933245068",
 		VirtualAccountNo: query.Number,
 		ChannelCode:      751,

@@ -38,6 +38,7 @@ func RequestHitAPI(
 	request.Header.Set("Content-type", "application/json")
 
 	cmd, _ := http2curl.GetCurlCommand(request)
+	slog.Info("DLV request created:", slog.Any("client url", cmd))
 
 	response, err := httpClient.Do(request)
 	if err != nil {
