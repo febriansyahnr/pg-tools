@@ -8,3 +8,5 @@ tmp/*
 .secret.yaml
 tmp/main
 tmp/*.log
+tmp/build-errors.log
+tmp
